@@ -22,7 +22,7 @@ phases:
       - terraform init -no-color
       - terraform plan -out tf.plan
       - terraform show -json tf.plan > tf.json 
-      - checkov -f tf.json . --skip-check CKV_AWS_144
+      - checkov -f tf.json --skip-check CKV_AWS_144
 
   post_build:
     commands:
