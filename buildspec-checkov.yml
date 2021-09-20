@@ -9,7 +9,7 @@ phases:
   install:
     commands:
       - cd /usr/bin
-      - python3 -m pip install --upgrade pip
+      - python3 pip install –upgrade pip
       - pip3 install checkov
 
   build:
