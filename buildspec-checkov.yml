@@ -8,14 +8,13 @@ phases:
 
   install:
     runtime-versions:
-      python: 3.8
+      python: 3.7
     commands:
       - cd /usr/bin
       - "curl -s -qL -o terraform.zip https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip"
       - unzip -o terraform.zip
       - python -V
       - pip3 install awscli --upgrade --user
-      - pip3 install --upgrade pip && pip3 install --upgrade setuptools
       - pip3 install checkov
 
   build:
@@ -23,7 +22,7 @@ phases:
       - cd "$CODEBUILD_SRC_DIR"
       - terraform init -no-color
       - terraform plan -out tf.plan
-      - terraform show -json tf.plan  > tf.json 
+      - terraform show -json tf.plan | jq '.' > tf.json 
       - checkov -f tf.json
 
   post_build:
