@@ -8,14 +8,12 @@ phases:
 
   install:
     runtime-versions:
-      python: 3.7
+       python: latest
     commands:
       - cd /usr/bin
       - "curl -s -qL -o terraform.zip https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip"
       - unzip -o terraform.zip
       - python -V
-      - pip3 install awscli --upgrade --user
-      - curl -fsSL -o- https://bootstrap.pypa.io/pip/3.5/get-pip.py | python3.5
       - pip3 install checkov
 
   build:
