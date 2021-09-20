@@ -9,7 +9,7 @@ phases:
   install:
     commands:
       - cd /usr/bin
-      - pip install --upgrade pip
+      - pip3 install --upgrade pip
       - pip3 install checkov
 
   build:
@@ -18,7 +18,6 @@ phases:
       - "curl -s -qL -o terraform.zip https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip"
       - unzip -o terraform.zip
       - terraform init -no-color
-      - terraform init
       - terraform plan --out tfplan.binary
       - terraform show -json tfplan.binary > tfplan.json
       - checkov -f tfplan.json
