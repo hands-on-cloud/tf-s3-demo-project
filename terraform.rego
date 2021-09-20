@@ -1,28 +1,20 @@
 package terraform
- 
+
 import input as tfplan
- 
-# Allowed Terraform resources
-allowed_resources = [
-	"aws_security_group",
-	#  "aws_instance",
-	"aws_s3_bucket"
-]
- 
- 
-array_contains(arr, elem) {
-	arr[_] = elem
+
+test_valid_s3_bucket {
+    result = deny with input as data.mock.valid_s3_bucket_input
+    count(result) == 0
 }
- 
-deny[reason] {
-  resource := tfplan.resource_changes[_]
-  action := resource.change.actions[count(resource.change.actions) - 1]
-  array_contains(["create", "update"], action)  # allow destroy action
 
-  not array_contains(allowed_resources, resource.type)
+test_invalid_s3_bucket_acls {
+    result = deny with input as data.mock.invalid_s3_bucket_acls_input
+    count(result) == 2
+}
 
-  reason := sprintf(
-    "%s: resource type %q is not allowed",
-    [resource.address, resource.type]
-  )
+test_invalid_s3_bucket_encryption {
+    result = deny with input as data.mock.invalid_s3_bucket_encryption_input
+    count(result) == 2
+    array_contains(result, "aws_s3_bucket.a: expected sse_algorithm to be one of [\"aws:kms\", \"AES256\"]")
+    array_contains(result, "module.child.aws_s3_bucket.b: requires server-side encryption with expected sse_algorithm to be one of [\"aws:kms\", \"AES256\"]")
 }
