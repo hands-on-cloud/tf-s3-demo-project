@@ -1,12 +1,22 @@
 resource "aws_s3_bucket" "test" {
-  bucket = "${lower(var.PROJECT)}-test"
+  bucket = "${lower(var.PROJECT)}-tf-test"
+  acl    = "private"
+
+  versioning {
+    enabled = true
+  }
 
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
-        sse_algorithm = "AES256"
+        kms_master_key_id = aws_kms_key.this.arn
+        sse_algorithm     = "aws:kms"
       }
     }
+  }
+
+  lifecycle {
+    prevent_destroy = false
   }
 
   tags = local.common_tags
@@ -40,6 +50,20 @@ resource "aws_s3_bucket_policy" "test" {
             "Condition": {
                 "Bool": {
                     "aws:SecureTransport": "false"
+                }
+            }
+        },
+        {
+            "Sid": "EnforceEncryption",
+            "Effect": "Deny",
+            "Principal": "*",
+            "Action": "s3:PutObject",
+            "Resource": [
+                "${aws_s3_bucket.test.arn}/*"
+            ],
+            "Condition": {
+                "StringNotEquals": {
+                    "s3:x-amz-server-side-encryption": "aws:kms"
                 }
             }
         }
