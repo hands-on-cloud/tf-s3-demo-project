@@ -22,7 +22,7 @@ resource "aws_s3_bucket_public_access_block" "s3Public_test" {
 }
 
 resource "aws_s3_bucket_policy" "test" {
-  bucket = "${aws_s3_bucket.test.id}"
+  bucket = aws_s3_bucket.test.id
 
   policy = <<POLICY
 {
