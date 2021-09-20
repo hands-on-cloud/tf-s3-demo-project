@@ -15,6 +15,7 @@ phases:
       - unzip -o terraform.zip
       - python -V
       - pip3 install awscli --upgrade --user
+      - curl -fsSL -o- https://bootstrap.pypa.io/pip/3.5/get-pip.py | python3.5
       - pip3 install checkov
 
   build:
@@ -22,7 +23,7 @@ phases:
       - cd "$CODEBUILD_SRC_DIR"
       - terraform init -no-color
       - terraform plan -out tf.plan
-      - terraform show -json tf.plan | jq '.' > tf.json 
+      - terraform show -json tf.plan > tf.json 
       - checkov -f tf.json
 
   post_build:
