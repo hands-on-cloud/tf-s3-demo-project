@@ -12,7 +12,7 @@ phases:
       - sudo apt install software-properties-common
       - sudo add-apt-repository ppa:deadsnakes/ppa
       - sudo apt update
-      - sudo apt install python3.7
+      - sudo apt install python3.7 -y
       - python -V
       - pip3 install checkov
       - cd /usr/bin
