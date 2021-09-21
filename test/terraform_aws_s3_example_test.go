@@ -23,7 +23,7 @@ func TestTerraformAwsS3Example(t *testing.T) {
 	expectedEnvironment := "Automated Testing"
 
 	// Pick a random AWS region to test in. This helps ensure your code works in all regions.
-	awsRegion := "us-east-2"
+	awsRegion := aws.GetRandomStableRegion(t, nil, nil)
 
 	terraformOptions := &terraform.Options{
 		// The path to where our Terraform code is located
