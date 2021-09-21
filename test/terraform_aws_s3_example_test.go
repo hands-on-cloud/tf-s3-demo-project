@@ -48,9 +48,6 @@ func TestTerraformAwsS3Example(t *testing.T) {
 	// This will run `terraform init` and `terraform apply` and fail the test if there are any errors
 	terraform.InitAndApply(t, terraformOptions)
 
-	// Run `terraform output` to get the value of an output variable
-	bucketID := terraform.Output(t, terraformOptions, "bucket_id")
-
 	// Verify that our Bucket has versioning enabled
 	actualStatus := aws.GetS3BucketVersioning(t, awsRegion, bucketID)
 	expectedStatus := "Enabled"
