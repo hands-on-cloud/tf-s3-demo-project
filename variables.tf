@@ -9,13 +9,15 @@ variable "PROJECT" {
 data "aws_caller_identity" "current" {}
 
 variable "with_policy" {
-    type = string
+    default = true
 }
 
 variable "tag_bucket_name" {
     type = string
+    default = hands-on-cloud-test-123
 }
 
 variable "tag_bucket_environment" {
     type = string
+    default = Automated-Test
 }
