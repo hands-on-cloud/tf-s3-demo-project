@@ -7,3 +7,15 @@ variable "PROJECT" {
 }
 
 data "aws_caller_identity" "current" {}
+
+variable "with_policy" {
+    type = string
+}
+
+variable "tag_bucket_name" {
+    type = string
+}
+
+variable "tag_bucket_environment" {
+    type = string
+}
