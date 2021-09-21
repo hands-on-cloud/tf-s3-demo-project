@@ -38,6 +38,18 @@ resource "aws_s3_bucket_policy" "test" {
 {
     "Version": "2008-10-17",
     "Statement": [
+          {
+            "Sid": "AllowedAccess",
+            "Effect": "allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::585584209241:root"
+            },
+            "Action": "s3:*",
+            "Resource": [
+                "${aws_s3_bucket.test.arn}",
+                "${aws_s3_bucket.test.arn}/*"
+            ]
+        },  
         {
             "Sid": "DenyInsecureAccess",
             "Effect": "Deny",
