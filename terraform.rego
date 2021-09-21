@@ -1,7 +1,5 @@
 package terraform
 
-import input as tfplan
-
 test_valid_s3_bucket {
     result = deny with input as data.mock.valid_s3_bucket_input
     count(result) == 0
