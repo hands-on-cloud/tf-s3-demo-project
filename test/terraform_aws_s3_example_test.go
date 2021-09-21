@@ -31,9 +31,9 @@ func TestTerraformAwsS3Example(t *testing.T) {
 
 		// Variables to pass to our Terraform code using -var options
 		Vars: map[string]interface{}{
-			"tag_bucket_name":        expectedName,
-			"tag_bucket_environment": expectedEnvironment,
-			"with_policy":            "true",
+			"name":        expectedName,
+			"env":         expectedEnvironment,
+			"with_policy": "true",
 		},
 
 		// Environment variables to set when running Terraform

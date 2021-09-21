@@ -12,12 +12,10 @@ variable "with_policy" {
     default = true
 }
 
-variable "tag_bucket_name" {
-    type = string
-    default = hands-on-cloud-test-123
+variable "name" {
+    default = "hands-on-cloud-tf-test"
 }
 
-variable "tag_bucket_environment" {
-    type = string
-    default = Automated-Test
+variable "env" {
+    default = "Test"
 }

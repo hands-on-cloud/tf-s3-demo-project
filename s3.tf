@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "test" {
-  bucket = "${lower(var.PROJECT)}-tf-test"
+  bucket = var.name
   acl    = "private"
 
   versioning {
