@@ -20,7 +20,8 @@ phases:
   build:
     commands:
       - cd "$CODEBUILD_SRC_DIR"
-      - terrascan scan
+      - terrascan init
+      - terrascan scan -i terraform
 
   post_build:
     commands:
