@@ -19,7 +19,7 @@ phases:
   build:
     commands:   
       - cd "$CODEBUILD_SRC_DIR"
-      - checkov --directory ./ --skip-check CKV_AWS_144
+      - checkov --directory ./ --skip-check CKV_AWS_18,CKV_AWS_144
 
   post_build:
     commands:
