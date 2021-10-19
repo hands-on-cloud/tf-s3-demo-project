@@ -1,3 +1,22 @@
+terraform {
+  backend "s3" {
+    bucket = "hands-on-cloud-terraform-remote-state-s3"
+    key = "demo-tf-project.tfstate"
+    region = "us-west-2"
+    encrypt = "true"
+  }
+}
+
+data "aws_caller_identity" "current" {}
+
+locals {
+  common_tags = {
+    Project         = "hands-on-cloud"
+    ManagedBy       = "Terraform"
+    Environment     = var.env
+  }
+}
+
 resource "aws_s3_bucket" "test" {
   bucket = var.name
   acl    = "private"
@@ -41,9 +60,7 @@ resource "aws_s3_bucket_policy" "test" {
           {
             "Sid": "AllowedAccess",
             "Effect": "allow",
-            "Principal": {
-                "AWS": "arn:aws:iam::585584209241:root"
-            },
+            "Principal": { "AWS": "${data.aws_caller_identity.current.account_id}" },
             "Action": "s3:*",
             "Resource": [
                 "${aws_s3_bucket.test.arn}",

@@ -15,8 +15,10 @@ phases:
   build:
     commands:   
       - cd "$CODEBUILD_SRC_DIR"
-      - cd test/
+      - cd test/terratest
       - go mod init "tftest"
+      - go get github.com/gruntwork-io/terratest/modules/aws
+      - go get github.com/gruntwork-io/terratest/modules/terraform@v0.38.2
       - go test -v
 
   post_build:

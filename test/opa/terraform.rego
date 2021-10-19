@@ -5,7 +5,6 @@ import input as tfplan
 # Allowed Terraform resources
 allowed_resources = [
 	"aws_security_group",
-	#  "aws_instance",
 	"aws_s3_bucket"
 ]
  

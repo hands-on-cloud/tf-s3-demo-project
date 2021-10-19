@@ -20,7 +20,7 @@ phases:
       - terraform init -no-color
       - terraform plan -out tf.plan
       - terraform show -json tf.plan > tf.json 
-      - opa eval --format pretty --data terraform.rego --input tf.json "data.terraform"
+      - opa eval --format pretty --data ./test/opa/terraform.rego --input tf.json "data.terraform"
 
   post_build:
     commands:
