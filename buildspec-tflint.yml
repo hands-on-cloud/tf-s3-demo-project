@@ -11,7 +11,8 @@ phases:
       - cd /usr/bin
       - "curl -s -qL -o terraform.zip https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip"
       - unzip -o terraform.zip
-      - "curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash"
+      - "curl --location https://github.com/terraform-linters/tflint/releases/download/v0.33.0/tflint_linux_amd64.zip --output tflint_linux_amd64.zip"
+      - unzip -o tflint_linux_amd64.zip
 
   build:
     commands:   
