@@ -16,7 +16,7 @@ phases:
   build:
     commands:   
       - cd "$CODEBUILD_SRC_DIR"
-      - terraform init -no-color
+      - terraform init
       - terraform validate
       - tflint --init
       - tflint
