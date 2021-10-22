@@ -12,7 +12,7 @@ phases:
       - cd /usr/bin
       - "curl -s -qL -o terraform.zip https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip"
       - unzip -o terraform.zip
-      - "curl -fsSL https://raw.githubusercontent.com/infracost/infracost/master/scripts/install.sh | sh"
+      - "curl -fsSL https://raw.githubusercontent.com/infracost/infracost/master/scripts/install.sh | bash"
 
   build:
     commands:
