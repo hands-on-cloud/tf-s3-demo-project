@@ -6,6 +6,10 @@ Check out [How to use CodePipeline CICD pipeline to test Terraform](https://hand
 
 ## Deployment
 
+Modify [Infracost](https://github.com/infracost/infracost) SSM parameter store key name at [buildspec-infracost.yml](buildspec-infracost.yml).
+
+Deploy module as usual:
+
 ```shell
 terraform init
 terraform apply -auto-approve
